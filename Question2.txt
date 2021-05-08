@@ -1,0 +1,33 @@
+Question 2: For this question you’ll need to use SQL. Follow this link to access the data set required for the challenge. Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.
+
+a) How many orders were shipped by Speedy Express in total?
+
+Query:
+SELECT Count(ShipperName) Sales
+FROM Orders JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
+WHERE Shippers.ShipperName = 'Speedy Express';
+
+Result:
+54
+
+b) What is the last name of the employee with the most orders?
+
+Query:
+SELECT Employees.LastName 
+FROM Orders JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID ORDER BY COUNT(LastName)  DESC LIMIT 1;
+
+Result:
+Peacock
+
+c) What product was ordered the most by customers in Germany?
+
+Query:
+SELECT Products.ProductName FROM Orders 
+JOIN OrderDetails ON Orders.OrderID = OrderDetails.OrderID	
+JOIN Customers ON Orders.CustomerID = Customers.CustomerID
+JOIN Products ON OrderDetails.ProductID = Products.ProductID
+GROUP BY Customers.Country ORDER BY COUNT(Products.ProductID)  DESC LIMIT 1;
+
+Result:
+Jack's New England Clam Chowder
